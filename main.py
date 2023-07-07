@@ -1,8 +1,11 @@
 import pygame, sys
 from pygame.locals import *
+from level import *
+from player import *
 from tile import *
+from controller import *
 
-
+findcontrolers(1,1)
 
 #initalize pygame. Pygame is a visual output.
 pygame.init()
@@ -16,10 +19,19 @@ screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
 backgroundColor = (55,255,55)
 
+images = {"wa": "images/tiles/wall33.gif", "f": "images/tiles/roomFloor13.gif"}
+player = Player("images/beings/nightdwarf.gif", (64, 64))
+
+#homework for this week:
+    #make the movement events for your various keys
+    #instantiate a player
+#Optional:
+    #make a "door" class in Tiles (inherits from tile, something to enter and exit levels)
 
 
 def main():
     global screen
+    ranLev = RandomLevel(images)
     while True:
         #this is our main game loop
         #tick the clock
@@ -34,18 +46,16 @@ def main():
                     screen = pygame.display.set_mode(size, FULLSCREEN)
                 elif event.key == K_ESCAPE:
                     screen = pygame.display.set_mode(size)
+                #elif event.key == K_UP:
+                    #player.
+
+        ranLev.update()
         screen.fill(backgroundColor)
+        ranLev.draw(screen)
         pygame.display.flip()
 
 if __name__ == "__main__":
     main()
 
-#for homework, try intialising a couple of tiles and placing them into your game window. Try with a couple diff pictures, and with a few different types.
 
-#open world - move between different levels. Lower levels are harder.
-#player, enemies, power ups, exit square.
-#levels themselves - building the levels.
-    #big overworld with dungeons.
-
-#one class for level - each level made of a bunch of tiles.
 
